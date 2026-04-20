@@ -27,41 +27,61 @@ npx skills add korflux/skills --list
 
 Install one skill globally:
 
+- WordPress Core:
+
 ```bash
 npx skills add korflux/skills --skill wordpress-core-development -g -y
 ```
+
+- WordPress Theme:
 
 ```bash
 npx skills add korflux/skills --skill wordpress-theme-development -g -y
 ```
 
+- WordPress Plugin:
+
 ```bash
 npx skills add korflux/skills --skill wordpress-plugin-development -g -y
 ```
+
+- Elementor Router:
 
 ```bash
 npx skills add korflux/skills --skill elementor-development -g -y
 ```
 
+- Elementor Free:
+
 ```bash
 npx skills add korflux/skills --skill elementor-free-development -g -y
 ```
+
+- Elementor Pro:
 
 ```bash
 npx skills add korflux/skills --skill elementor-pro-development -g -y
 ```
 
+- Hello Elementor Theme:
+
 ```bash
 npx skills add korflux/skills --skill hello-elementor-theme-development -g -y
 ```
+
+- Hello Elementor Child Theme:
 
 ```bash
 npx skills add korflux/skills --skill hello-elementor-child-development -g -y
 ```
 
+- Caramelo Theme:
+
 ```bash
 npx skills add korflux/skills --skill caramelo-theme-development -g -y
 ```
+
+- Caramelo Astro Adaptation:
 
 ```bash
 npx skills add korflux/skills --skill caramelo-astro-adaptation -g -y
@@ -125,3 +145,5 @@ Each skill contains its own `SKILL.md` plus focused reference files for workflow
 - Keep Caramelo WordPress runtime work separate from Astro release adaptation work.
 - Improve auto-discovery by using stronger, domain-specific triggers.
 - Reduce ambiguous routing between presentation, reusable functionality, and WordPress internals.
+
+By Marco Kormoczi
