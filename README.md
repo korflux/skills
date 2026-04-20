@@ -1,8 +1,8 @@
 # skills
 
-WordPress and Elementor-focused agent skills for the open agent skills ecosystem.
+WordPress, Elementor, and Caramelo-focused agent skills for the open agent skills ecosystem.
 
-This repository publishes eight separate skills with intentionally different discovery surfaces so agents can route requests more accurately between WordPress Core, WordPress themes, WordPress plugins, Elementor Free, Elementor Pro, Hello Elementor theme work, Hello Elementor child theme work, and broad Elementor routing.
+This repository publishes ten separate skills with intentionally different discovery surfaces so agents can route requests more accurately between WordPress Core, WordPress themes, WordPress plugins, Elementor Free, Elementor Pro, Hello Elementor theme work, Hello Elementor child theme work, Caramelo theme runtime work inside WordPress, Caramelo-targeted Astro adaptation work, and broad Elementor routing.
 
 ## Available Skills
 
@@ -14,6 +14,8 @@ This repository publishes eight separate skills with intentionally different dis
 - `elementor-pro-development`: for reusable Elementor Pro addon or plugin code such as dynamic tags, form actions, form fields, forms hooks, and Theme Builder conditions.
 - `hello-elementor-theme-development`: for the Hello Elementor parent theme package itself, including `hello-theme-main`, parent hooks, Elementor integration files, settings, and theme-owned behavior.
 - `hello-elementor-child-development`: for site-specific customization in a Hello Elementor child theme, including `functions.php`, `style.css`, asset loading, and filter-based overrides.
+- `caramelo-theme-development`: for Caramelo Theme Child runtime work inside WordPress, including render mode, Astro entry mapping, release resolution, router behavior, import flows, admin screens, and project customizations that depend on Caramelo being loaded.
+- `caramelo-astro-adaptation`: for adapting an Astro source project or build artifact so it can be published through Caramelo Theme Child with the expected `manifest.json`, entry mapping, asset strategy, and release packaging.
 
 ## Install
 
@@ -57,6 +59,14 @@ npx skills add korflux/skills --skill hello-elementor-theme-development -g -y
 npx skills add korflux/skills --skill hello-elementor-child-development -g -y
 ```
 
+```bash
+npx skills add korflux/skills --skill caramelo-theme-development -g -y
+```
+
+```bash
+npx skills add korflux/skills --skill caramelo-astro-adaptation -g -y
+```
+
 Install all skills:
 
 ```bash
@@ -72,6 +82,8 @@ skills/
   elementor-pro-development/
   hello-elementor-theme-development/
   hello-elementor-child-development/
+  caramelo-theme-development/
+  caramelo-astro-adaptation/
   wordpress-core-development/
   wordpress-theme-development/
   wordpress-plugin-development/
@@ -86,6 +98,9 @@ Each skill contains its own `SKILL.md` plus focused reference files for workflow
 - Use `elementor-pro-development` when the owner is reusable addon or plugin code and the surface is dynamic tags, forms, or Theme Builder conditions.
 - Use `hello-elementor-theme-development` when the change must land in `hello-theme-main` and become parent-theme behavior for all users of the package.
 - Use `hello-elementor-child-development` when the change is site-specific and should live in child theme `functions.php`, `style.css`, or child-only assets.
+- Use `caramelo-theme-development` when the owner is `caramelotheme-main`, the WordPress-side Caramelo runtime, a Caramelo admin screen, release state, import flow, router behavior, or the project customization layer initialized from `caramelo_theme_child_loaded`.
+- Use `caramelo-astro-adaptation` when the owner is the Astro source project or built release artifact that must satisfy Caramelo's static release contract.
+- If the existing Caramelo contract is correct and the Astro build needs to adapt to it, use `caramelo-astro-adaptation`. If the importer, router, metabox, admin UI, or shipped contract inside `caramelotheme-main` needs to change, use `caramelo-theme-development`.
 - Theme location registration or display inside Hello theme files belongs to the Hello parent or child theme skills, not to `elementor-pro-development`.
 - Fall back to the WordPress plugin, theme, or Core skills when the task is not actually owned by Elementor or Hello Elementor.
 
@@ -99,11 +114,14 @@ Each skill contains its own `SKILL.md` plus focused reference files for workflow
 - `elementor-pro-development`: EN: `Register a dynamic tag and a custom form action in Elementor Pro.` PT: `Adicione uma tag dinamica e uma acao depois do envio do formulario no Elementor Pro.`
 - `hello-elementor-theme-development`: EN: `Change how Hello Elementor parent theme handles page titles and theme integration.` PT: `Ajuste o tema pai Hello Elementor, incluindo page title e integracao com o Elementor.`
 - `hello-elementor-child-development`: EN: `Override a Hello parent hook and enqueue site-specific CSS in the child theme.` PT: `No child theme do Hello, sobrescreva um hook do tema pai e carregue CSS especifico do site.`
+- `caramelo-theme-development`: EN: `Add code to Caramelo functions.php, adjust the Caramelo Rendering metabox, or fix Astro routing and release behavior inside WordPress.` PT: `No Caramelo, adicione codigo ao functions.php, ajuste o metabox Caramelo Rendering, ou corrija o roteamento Astro e a validacao de release dentro do WordPress.`
+- `caramelo-astro-adaptation`: EN: `Adapt this Astro site for Caramelo Theme Child by generating manifest.json, fixing _astro asset paths, and packaging a release ZIP for import.` PT: `Adapte este projeto Astro para o Caramelo gerando o manifest.json, corrigindo os assets _astro e empacotando um ZIP de release para importacao.`
 
 ## Goals
 
 - Keep WordPress Core, theme, and plugin work separate.
 - Keep Elementor routing separate from Elementor implementation surfaces.
 - Keep Elementor Free, Elementor Pro, Hello Elementor parent theme, and Hello Elementor child theme work separate.
+- Keep Caramelo WordPress runtime work separate from Astro release adaptation work.
 - Improve auto-discovery by using stronger, domain-specific triggers.
 - Reduce ambiguous routing between presentation, reusable functionality, and WordPress internals.
