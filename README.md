@@ -1,8 +1,8 @@
 # skills
 
-WordPress, Elementor, and Caramelo-focused agent skills for the open agent skills ecosystem.
+WordPress, Elementor, Caramelo, and SmartMemory-focused agent skills for the open agent skills ecosystem.
 
-This repository publishes ten separate skills with intentionally different discovery surfaces so agents can route requests more accurately between WordPress Core, WordPress themes, WordPress plugins, Elementor Free, Elementor Pro, Hello Elementor theme work, Hello Elementor child theme work, Caramelo theme runtime work inside WordPress, Caramelo-targeted Astro adaptation work, and broad Elementor routing.
+This repository publishes eleven separate skills with intentionally different discovery surfaces so agents can route requests more accurately between WordPress Core, WordPress themes, WordPress plugins, Elementor Free, Elementor Pro, Hello Elementor theme work, Hello Elementor child theme work, Caramelo theme runtime work inside WordPress, Caramelo-targeted Astro adaptation work, SmartMemory installation work, and broad Elementor routing.
 
 ## Available Skills
 
@@ -16,6 +16,7 @@ This repository publishes ten separate skills with intentionally different disco
 - `hello-elementor-child-development`: for site-specific customization in a Hello Elementor child theme, including `functions.php`, `style.css`, asset loading, and filter-based overrides.
 - `caramelo-theme-development`: for Caramelo Theme Child runtime work inside WordPress, including render mode, Astro entry mapping, release resolution, router behavior, import flows, admin screens, and project customizations that depend on Caramelo being loaded.
 - `caramelo-astro-adaptation`: for adapting an Astro source project or build artifact so it can be published through Caramelo Theme Child with the expected `manifest.json`, entry mapping, asset strategy, and release packaging.
+- `smartmemory-installation`: for installing SmartMemory into new or existing repositories from the public GitHub source, including template choice, safe `.github/` and `memory/` placement, collision checks, and first-run Copilot prompts.
 
 ## Install
 
@@ -87,6 +88,12 @@ npx skills add korflux/skills --skill caramelo-theme-development -g -y
 npx skills add korflux/skills --skill caramelo-astro-adaptation -g -y
 ```
 
+- SmartMemory Installation:
+
+```bash
+npx skills add korflux/skills --skill smartmemory-installation -g -y
+```
+
 Install all skills:
 
 ```bash
@@ -104,6 +111,7 @@ skills/
   hello-elementor-child-development/
   caramelo-theme-development/
   caramelo-astro-adaptation/
+  smartmemory-installation/
   wordpress-core-development/
   wordpress-theme-development/
   wordpress-plugin-development/
@@ -120,6 +128,8 @@ Each skill contains its own `SKILL.md` plus focused reference files for workflow
 - Use `hello-elementor-child-development` when the change is site-specific and should live in child theme `functions.php`, `style.css`, or child-only assets.
 - Use `caramelo-theme-development` when the owner is `caramelotheme-main`, the WordPress-side Caramelo runtime, a Caramelo admin screen, release state, import flow, router behavior, or the project customization layer initialized from `caramelo_theme_child_loaded`.
 - Use `caramelo-astro-adaptation` when the owner is the Astro source project or built release artifact that must satisfy Caramelo's static release contract.
+- Use `smartmemory-installation` when the task is to add SmartMemory from `https://github.com/korflux/SmartMemory` to a new or existing repository, choose between the GitHub template and in-place install flows, or handle `.github/` and `memory/` collisions safely.
+- If the task is generic GitHub Copilot bootstrap work unrelated to SmartMemory, prefer a broader Copilot setup surface when one is available. If the task changes SmartMemory upstream internals, work in the SmartMemory repository itself rather than treating it as an install task.
 - If the existing Caramelo contract is correct and the Astro build needs to adapt to it, use `caramelo-astro-adaptation`. If the importer, router, metabox, admin UI, or shipped contract inside `caramelotheme-main` needs to change, use `caramelo-theme-development`.
 - Theme location registration or display inside Hello theme files belongs to the Hello parent or child theme skills, not to `elementor-pro-development`.
 - Fall back to the WordPress plugin, theme, or Core skills when the task is not actually owned by Elementor or Hello Elementor.
@@ -136,6 +146,7 @@ Each skill contains its own `SKILL.md` plus focused reference files for workflow
 - `hello-elementor-child-development`: EN: `Override a Hello parent hook and enqueue site-specific CSS in the child theme.` PT: `No child theme do Hello, sobrescreva um hook do tema pai e carregue CSS especifico do site.`
 - `caramelo-theme-development`: EN: `Add code to Caramelo functions.php, adjust the Caramelo Rendering metabox, or fix Astro routing and release behavior inside WordPress.` PT: `No Caramelo, adicione codigo ao functions.php, ajuste o metabox Caramelo Rendering, ou corrija o roteamento Astro e a validacao de release dentro do WordPress.`
 - `caramelo-astro-adaptation`: EN: `Adapt this Astro site for Caramelo Theme Child by generating manifest.json, fixing _astro asset paths, and packaging a release ZIP for import.` PT: `Adapte este projeto Astro para o Caramelo gerando o manifest.json, corrigindo os assets _astro e empacotando um ZIP de release para importacao.`
+- `smartmemory-installation`: EN: `Install SmartMemory in this repository from GitHub, choose the right flow for a new or existing project, and tell me whether to run /init or scan project next.` PT: `Instale o SmartMemory neste repositorio a partir do GitHub, escolha o fluxo certo para projeto novo ou em andamento, e diga se devo rodar /init ou scan project depois.`
 
 ## Goals
 
@@ -143,6 +154,7 @@ Each skill contains its own `SKILL.md` plus focused reference files for workflow
 - Keep Elementor routing separate from Elementor implementation surfaces.
 - Keep Elementor Free, Elementor Pro, Hello Elementor parent theme, and Hello Elementor child theme work separate.
 - Keep Caramelo WordPress runtime work separate from Astro release adaptation work.
+- Keep SmartMemory installation work separate from generic Copilot bootstrap and from SmartMemory upstream changes.
 - Improve auto-discovery by using stronger, domain-specific triggers.
 - Reduce ambiguous routing between presentation, reusable functionality, and WordPress internals.
 
